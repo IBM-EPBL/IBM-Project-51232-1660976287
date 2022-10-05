@@ -1,0 +1,67 @@
+import RPi.GPIO as GPIO
+import time
+import signal
+import sys
+
+import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
+from time import sleep # Import the sleep function from the time module
+
+GPIO.setwarnings(False) # Ignore warning for now
+GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
+GPIO.setup(8, GPIO.OUT, initial=GPIO.LOW) # Set pin 8 to be an output pin and set initial value to low (off)
+
+
+# Setup
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(9, GPIO.OUT)
+GPIO.setup(10, GPIO.OUT)
+GPIO.setup(11, GPIO.OUT)
+
+
+# Loop forever
+while True: 
+    # Red 
+    GPIO.output(9, True) 
+
+    GPIO.output(8, GPIO.HIGH) # Turn on
+    sleep(1) # Sleep for 1 second
+    GPIO.output(8, GPIO.LOW) # Turn off
+    sleep(1) # Sleep for 1 second
+    GPIO.output(8, GPIO.HIGH) # Turn on
+    sleep(1) # Sleep for 1 second
+
+
+
+
+    # Red and amber 
+    GPIO.output(10, True) 
+    GPIO.output(8, GPIO.LOW) # Turn off
+    sleep(1) # Sleep for 1 second  
+
+
+    # Green 
+    GPIO.output(9, False) 
+    GPIO.output(10, False) 
+    GPIO.output(11, True) 
+
+    GPIO.output(8, GPIO.HIGH) # Turn on
+    sleep(1) # Sleep for 1 second
+    GPIO.output(8, GPIO.LOW) # Turn off
+    sleep(1) # Sleep for 1 second
+    GPIO.output(8, GPIO.HIGH) # Turn on
+    sleep(1) # Sleep for 1 second
+    GPIO.output(8, GPIO.LOW) # Turn off
+    sleep(1) # Sleep for 1 second
+
+  
+    # Amber 
+    GPIO.output(11, False) 
+    GPIO.output(10, True) 
+
+    GPIO.output(8, GPIO.HIGH) # Turn on
+    sleep(1) # Sleep for 1 second
+    GPIO.output(8, GPIO.LOW) # Turn off
+    sleep(1) # Sleep for 1 second  
+
+    # Amber off (red comes on at top of loop) 
+    GPIO.output(10, False)
